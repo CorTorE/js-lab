@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로컬스토리지 테스트</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <button class="theme-toggle" onclick="controller.toggleTheme()">
+      🌙 다크모드
+    </button>
+    <h1>로컬스토리지 테스트</h1>
+    <div class="container">
+      <div class="input-section">
+        <div class="input-group">
+          <label for="storageKey">키:</label>
+          <input
+            type="text"
+            id="storageKey"
+            placeholder="키 입력"
+            value="testKey"
+          />
+        </div>
+        <div class="input-group">
+          <label for="storageValue">값:</label>
+          <input
+            type="text"
+            id="storageValue"
+            placeholder="값 입력"
+            value="testValue"
+          />
+        </div>
+        <button onclick="controller.setStorage()">추가</button>
+        <button onclick="controller.removeStorage()">삭제</button>
+      </div>
+      <div id="log"></div>
+      <div class="current-storage">
+        <h2>현재 로컬스토리지 상태</h2>
+        <div id="storage-content"></div>
+      </div>
+    </div>
+
+    <script src="model.js"></script>
+    <script src="view.js"></script>
+    <script src="controller.js"></script>
+    <script>
+      // 애플리케이션 초기화
+      controller.init();
+    </script>
+  </body>
+</html>

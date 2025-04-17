@@ -1,0 +1,183 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --input-bg: #f8f9fa;
+  --border-color: #ddd;
+  --hover-color: #45a049;
+  --active-color: #3d8b40;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1a1a1a;
+  --text-color: #ffffff;
+  --input-bg: #2d2d2d;
+  --border-color: #444;
+  --hover-color: #3d8b40;
+  --active-color: #2d6b30;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-section {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 15px;
+  background-color: var(--input-bg);
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-group label {
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+input[type="text"] {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+  width: 200px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: var(--hover-color);
+}
+
+button:active {
+  background-color: var(--active-color);
+}
+
+#log {
+  margin-top: 10px;
+  padding: 15px;
+  background-color: var(--input-bg);
+  border-radius: 8px;
+  height: 400px;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  transition: background-color 0.3s;
+}
+
+.current-storage {
+  padding: 15px;
+  background-color: var(--input-bg);
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.current-storage h2 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+#storage-content {
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.storage-item {
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.storage-item:last-child {
+  border-bottom: none;
+}
+
+.storage-key {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.storage-value {
+  color: var(--text-color);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.theme-toggle:hover {
+  background-color: var(--hover-color);
+}
+
+/* 스크롤바 스타일링 */
+#log::-webkit-scrollbar {
+  width: 8px;
+}
+
+#log::-webkit-scrollbar-track {
+  background: var(--input-bg);
+  border-radius: 4px;
+}
+
+#log::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+#log::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
