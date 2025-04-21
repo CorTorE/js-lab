@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <title>쿠키 로그인 실험</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>로그인 테스트</h1>
+            <input id="username" type="text" placeholder="이름 입력" />
+            <button id="loginBtn">로그인</button>
+            <button id="checkBtn">로그인 상태 확인</button>
+            <button id="logoutBtn">로그아웃</button>
+
+            <p id="result"></p>
+        </div>
+
+        <script>
+            document.getElementById("loginBtn").onclick = async () => {
+                const username = document.getElementById("username").value;
+                const res = await fetch("/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username }),
+                });
+                const data = await res.json();
+                document.getElementById("result").innerText = data.message;
+            };
+
+            document.getElementById("checkBtn").onclick = async () => {
+                const res = await fetch("/check", { credentials: "include" });
+                const data = await res.json();
+                document.getElementById("result").innerText = data.message;
+            };
+
+            document.getElementById("logoutBtn").onclick = async () => {
+                const res = await fetch("/logout", {
+                    method: "POST",
+                    credentials: "include",
+                });
+                const data = await res.json();
+                document.getElementById("result").innerText = data.message;
+            };
+        </script>
+    </body>
+</html>

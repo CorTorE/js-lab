@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <title>😈 Hacker Page</title>
+    </head>
+    <body>
+        <h1>😈 해커 페이지</h1>
+        <button id="stealClick">몰래 클릭 시도</button>
+        <pre id="result"></pre>
+
+        <script>
+            document.getElementById("stealClick").onclick = async () => {
+                const res = await fetch("/click", {
+                    method: "POST",
+                    credentials: "include", // 쿠키 포함
+                });
+                const data = await res.json();
+                document.getElementById("result").innerText = data.message;
+            };
+        </script>
+    </body>
+</html>
