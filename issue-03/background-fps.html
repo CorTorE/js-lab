@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>rAF & VisibilityState 실험</title>
+        <link href="./sytles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <h1>requestAnimationFrame Throttling 실험</h1>
+        <div id="info">
+            <p>
+                <strong>Visibility:</strong>
+                <span id="visibility">visible</span>
+            </p>
+            <p><strong>FPS:</strong> <span id="fps">0</span></p>
+        </div>
+        <div id="box"></div>
+        <div id="log"></div>
+
+        <script>
+            const box = document.getElementById("box");
+            const fpsEl = document.getElementById("fps");
+            const visEl = document.getElementById("visibility");
+            const logEl = document.getElementById("log");
+
+            let x = 0;
+            let lastFrameTime = performance.now();
+            let frameCount = 0;
+            let fps = 0;
+            let lastLoggedFPS = 0;
+            let fallbackTimer = null;
+
+            function log(msg) {
+                const timestamp = new Date().toLocaleTimeString();
+                logEl.textContent += `[${timestamp}] ${msg}\n`;
+                logEl.scrollTop = logEl.scrollHeight;
+            }
+
+            document.addEventListener("visibilitychange", () => {
+                visEl.textContent = document.visibilityState;
+                log(`탭 상태 변경: ${document.visibilityState}`);
+
+                if (document.visibilityState === "hidden") {
+                    frameCount = 0;
+                    lastFrameTime = performance.now();
+                    fallbackTimer = setInterval(() => {
+                        const now = performance.now();
+                        const elapsed = now - lastFrameTime;
+                        const currentFPS = Math.round(
+                            (frameCount * 1000) / elapsed
+                        );
+                        fpsEl.textContent = currentFPS;
+                        log(`FPS (백그라운드): ${currentFPS}`);
+                        frameCount = 0;
+                        lastFrameTime = now;
+                    }, 1000);
+                } else {
+                    clearInterval(fallbackTimer);
+                    fallbackTimer = null;
+                }
+            });
+
+            function updateFPS(now) {
+                frameCount++;
+                if (now - lastFrameTime >= 1000) {
+                    fps = frameCount;
+                    fpsEl.textContent = fps;
+                    if (fps !== lastLoggedFPS) {
+                        log(`FPS: ${fps}`);
+                        lastLoggedFPS = fps;
+                    }
+                    frameCount = 0;
+                    lastFrameTime = now;
+                }
+            }
+
+            function animate(now) {
+                if (document.visibilityState === "visible") {
+                    updateFPS(now);
+                } else {
+                    frameCount++;
+                }
+                x = (x + 1) % window.innerWidth;
+                box.style.transform = `translateX(${x}px)`;
+                requestAnimationFrame(animate);
+            }
+
+            requestAnimationFrame(animate);
+        </script>
+    </body>
+</html>
