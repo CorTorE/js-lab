@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>requestAnimationFrame vs Others 실험</title>
+  </head>
+  <body>
+    <h3>콜백 실행 시점 확인</h3>
+    <pre id="log"></pre>
+    <script>
+      log.textContent += "1. 동기 코드 시작\n";
+
+      setTimeout(() => {
+        log.textContent += "2. setTimeout(0) 실행\n";
+      }, 0);
+
+      Promise.resolve().then(() => {
+        log.textContent += "3. Promise.then 실행\n";
+      });
+
+      requestAnimationFrame(() => {
+        log.textContent += "4. requestAnimationFrame 실행 (렌더링 직전)\n";
+      });
+
+      log.textContent += "5. 동기 코드 끝\n";
+    </script>
+  </body>
+</html>
