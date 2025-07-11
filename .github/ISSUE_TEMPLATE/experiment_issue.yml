@@ -1,0 +1,39 @@
+name: 🧪 이번 실험은 무엇인가요?
+description: 실험 내용을 공유해주세요!
+title: "🧐 프로젝트 실험 제목"
+labels: []
+assignees:
+  - BangDori
+body:
+  - type: input
+    id: purpose
+    attributes:
+      label: Purpose of Issue
+      description: 해당 실험을 통해 달성하려는 목표를 한 줄로 작성해주세요.
+      placeholder: 실행 컨텍스트의 내부 동작 원리를 이해하고 ...더보기
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: The Reason
+      description: 실험을 진행하게 된 계기와 어떤 실험을 진행할 것인지 작성해주세요.
+      placeholder: 재밌어보여서 실험을 해보고 싶었구요! 실험은 자바스크립트를 이용해서 어쩌구 저쩌구할 거에요!
+    validations:
+      required: true
+  - type: input
+    id: related_files
+    attributes:
+      label: Related Link
+      description: 관련된 링크가 있다면 추가해주세요.
+      placeholder: http://example.com
+    validations:
+      required: false
+  - type: checkboxes
+    id: checked_labels
+    attributes:
+      label: Labels
+      description: 해당 이슈에 적합한 Label을 설정해주세요.
+      options:
+        - label: 이슈의 label을 선택하셨나요?
+          required: true
