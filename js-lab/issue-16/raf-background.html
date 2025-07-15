@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>requestAnimationFrame 백그라운드 테스트</title>
+  </head>
+  <body>
+    <h1>requestAnimationFrame 백그라운드 테스트</h1>
+    <p>
+      이 탭을 백그라운드로 전환한 뒤 다시 돌아오면 콘솔에서 프레임 간격 변화를
+      확인할 수 있습니다.
+    </p>
+    <script>
+      let lastTime = performance.now();
+      let frameCount = 0;
+
+      function rafTest(now) {
+        frameCount++;
+        console.log(`[${frameCount}프레임] 현재시각: ${now.toFixed(2)}ms`);
+        lastTime = now;
+        requestAnimationFrame(rafTest);
+      }
+
+      requestAnimationFrame(rafTest);
+    </script>
+  </body>
+</html>

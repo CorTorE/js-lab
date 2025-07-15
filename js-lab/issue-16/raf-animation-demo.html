@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>requestAnimationFrame vs setTimeout 애니메이션 데모</title>
+  </head>
+  <body>
+    <h3>requestAnimationFrame vs setTimeout 애니메이션 비교</h3>
+    <button id="raf-burst">rAF 10프레임 이동</button>
+    <button id="timeout-burst">setTimeout 10회 연속 이동</button>
+    <div
+      style="
+        position: relative;
+        width: 400px;
+        height: 90px;
+        background: #eee;
+        margin-top: 10px;
+      "
+    >
+      <div
+        id="raf-burst-box"
+        style="
+          position: absolute;
+          left: 0;
+          top: 10px;
+          width: 60px;
+          height: 30px;
+          background: #8bc34a;
+          text-align: center;
+          line-height: 30px;
+        "
+      >
+        raf
+      </div>
+      <div
+        id="timeout-burst-box"
+        style="
+          position: absolute;
+          left: 0;
+          top: 50px;
+          width: 60px;
+          height: 30px;
+          background: #1976d2;
+          text-align: center;
+          line-height: 30px;
+          color: white;
+        "
+      >
+        timeout
+      </div>
+    </div>
+    <script>
+      // rAF 10프레임 이동
+      document.getElementById("raf-burst").addEventListener("click", () => {
+        const box = document.getElementById("raf-burst-box");
+        box.style.left = "0px";
+        let i = 0;
+        function move() {
+          if (i > 9) return;
+          box.style.left = i * 36 + "px";
+          i++;
+          requestAnimationFrame(move);
+        }
+        move();
+      });
+
+      // setTimeout 10회 연속 이동
+      document.getElementById("timeout-burst").addEventListener("click", () => {
+        const box = document.getElementById("timeout-burst-box");
+        box.style.left = "0px";
+        for (let i = 0; i < 10; i++) {
+          setTimeout(() => {
+            box.style.left = i * 36 + "px";
+          }, 0);
+        }
+      });
+    </script>
+  </body>
+</html>
